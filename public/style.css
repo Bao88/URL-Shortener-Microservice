@@ -1,0 +1,43 @@
+/****** Main Styling ******/
+@import url('https://fonts.googleapis.com/css?family=Nanum+Brush+Script');
+html { height: 100%; }
+body {
+	font-family: 'Nanum Brush Script', cursive;
+	font-size: 20px;
+  font-weight: bold;
+	color: #222;
+	background-image: url("https://www.webtrackstudio.com/wp-content/uploads/2016/06/photo.png"), url("https://www.webtrackstudio.com/wp-content/uploads/2016/06/photo.png"), linear-gradient(to bottom, grey, white);
+  background-repeat: no-repeat;
+  background-position: bottom left, bottom right;
+  text-align: center;
+}
+
+.container {
+	padding: 0;
+	margin-top: 40px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+	margin-bottom: 30px;
+}
+
+ol {
+	list-style-position: inside;
+}
+ul {
+	list-style-type: none;
+}
+
+a {
+	color: #2574A9;
+}
+/****** Logo Div Styling ******/
+
+img {
+	margin: 20px auto 0 auto;
+	display: block;
+}
