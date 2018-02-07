@@ -57,28 +57,30 @@ app.route('/new/*').get(function(req, res) {
   // console.log(req.url.slice(5));
   console.log(req.url.slice(5));
   var regex = new RegExp("^(http|https)://");
-  if(regex.test(req.url.slice(5))){
+  if(!regex.test(req.url.slice(5))){
    console.log("inside"); 
-  }
-  
-//   var nUrl = req.url.slice(5);
-//   var object = {original_url: "", short_url: ""};
-//   collection.find({original_url: nUrl}).next().then(function(items){
-//     // console.log(items);
-//     if(items === null){   //The URL has not been indexed yet
-//       object.original_url = nUrl;
-//       object.short_url = "https://bao88-url-shortener-microservice.glitch.me/" + size++;
-//       collection.save(object);
-//       // res.send("create new short url: " + object);
-//     } else {             // The URL is already indexed
-//       object.original_url = items.original_url;
-//       object.short_url = items.short_url;
-//     }
-//     res.status(200);
-//     res.type("json").send({original_url: object.original_url, short_url: object.short_url});
-//   });
+   res.type("json").send({original_url: null, short_url: null});
+  } else {
+    var nUrl = req.url.slice(5);
+    var object = {original_url: "", short_url: ""};
+    collection.find({original_url: nUrl}).next().then(function(items){
+      // console.log(items);
+      if(items === null){   //The URL has not been indexed yet
+        object.original_url = nUrl;
+        object.short_url = "https://bao88-url-shortener-microservice.glitch.me/" + size++;
+        collection.save(object);
+        // res.send("create new short url: " + object);
+      } else {             // The URL is already indexed
+        object.original_url = items.original_url;
+        object.short_url = items.short_url;
+      }
+      res.status(200);
+      res.type("json").send({original_url: object.original_url, short_url: object.short_url});
+    
+    });
   // collection.save({url: nUrl, number:1});
-		  res.send("create new short url: ");
+		  // res.send("create new short url: ");
+  }
 })
 
 // Retrieve url from the mongoDB with the shortened url
