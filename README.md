@@ -21,9 +21,9 @@
          </ul>
          <h3>Usage - use of shortened URLs</h3>
          <ul>
-           <li>input - https://bao88-url-shortener-microservice.glitch.me/{numbers}</li>  
+           <li>input - https://bao88-url-shortener-microservice.glitch.me/0</li>  
            <li>output - https://www.google.com</li>  
          </ul>
       </div>
-      <h1>The repository can be found <a href="https://github.com/Bao88/URL-Shortener-Microservice" target="_blank">here</a> </h1>
+      <h1>The app can be found <a href="https://bao88-url-shortener-microservice.glitch.me/" target="_blank">here</a> </h1>
    </body>

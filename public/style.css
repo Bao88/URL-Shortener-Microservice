@@ -3,7 +3,7 @@
 html { height: 100%; }
 body {
 	font-family: 'Nanum Brush Script', cursive;
-	font-size: 20px;
+	font-size: 17px;
   font-weight: bold;
 	color: #222;
 	background-image: url("https://www.webtrackstudio.com/wp-content/uploads/2016/06/photo.png"), url("https://www.webtrackstudio.com/wp-content/uploads/2016/06/photo.png"), linear-gradient(to bottom, grey, white);
@@ -35,9 +35,5 @@ ul {
 a {
 	color: #2574A9;
 }
-/****** Logo Div Styling ******/
 
-img {
-	margin: 20px auto 0 auto;
-	display: block;
-}
+

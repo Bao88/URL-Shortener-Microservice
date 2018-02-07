@@ -36,7 +36,7 @@ app.route('/_api/package.json')
   });
   
 // --------------------------------- mycode ---------------------------------
-var uri = process.env.MONGODB, retStr = "", myDB= null, collection= null;
+var uri = process.env.MONGODB, retStr = "", myDB= null, collection= null, size=0;
 mongodb.MongoClient.connect(uri, function(err, database){
   if(err) throw err;
   retStr+="Connecting to "+process.env.DB;
@@ -44,20 +44,55 @@ mongodb.MongoClient.connect(uri, function(err, database){
 //   Connect to the database
   myDB = database.db(process.env.DB);
   collection = myDB.collection(process.env.DB); //Create a reference to the collection
-  console.log(collection);
+  collection.count().then(function(items){
+    console.log(items);
+    size = items;
+  });
+  // console.log(collection);
   // database = db.collection(process.env.DB);
 });
-
+// /^\/(discussion|page)\/(.+)/
 // Create a new shortened url and store it in mongoDB
-app.route('/new/').get(function(req, res) {
-  // console.log(uri);
-  // collection.insert({ _id: });
-		  res.send("create new short url");
+app.route('/new/*').get(function(req, res) {
+  // console.log(req.url.slice(5));
+  console.log(req.url.slice(5));
+  var regex = new RegExp("^(http|https)://");
+  if(regex.test(req.url.slice(5))){
+   console.log("inside"); 
+  }
+  
+//   var nUrl = req.url.slice(5);
+//   var object = {original_url: "", short_url: ""};
+//   collection.find({original_url: nUrl}).next().then(function(items){
+//     // console.log(items);
+//     if(items === null){   //The URL has not been indexed yet
+//       object.original_url = nUrl;
+//       object.short_url = "https://bao88-url-shortener-microservice.glitch.me/" + size++;
+//       collection.save(object);
+//       // res.send("create new short url: " + object);
+//     } else {             // The URL is already indexed
+//       object.original_url = items.original_url;
+//       object.short_url = items.short_url;
+//     }
+//     res.status(200);
+//     res.type("json").send({original_url: object.original_url, short_url: object.short_url});
+//   });
+  // collection.save({url: nUrl, number:1});
+		  res.send("create new short url: ");
 })
 
 // Retrieve url from the mongoDB with the shortened url
 app.route('/([0-9]+)').get(function(req, res) {
-		  res.send("redirect url");
+  var url = "https://bao88-url-shortener-microservice.glitch.me"+req.url;
+  console.log(req.url);
+  collection.find({short_url: url}).next().then(function(item){
+    // console.log(item);
+    if(item){
+      res.redirect(item.original_url);  
+    } else {
+      res.send("No shortened URLs with that name.");
+    }
+  });	  
 })
 
 // --------------------------------- end mycode ---------------------------------
